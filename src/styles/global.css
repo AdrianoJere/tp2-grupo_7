@@ -17,8 +17,16 @@
   --font-retro: 'VT323', monospace;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;   /* NUNCA scroll horizontal en la página */
+  width: 100%;
+}
 
 body {
   background: var(--bg);
@@ -26,7 +34,6 @@ body {
   font-family: var(--font-retro);
   font-size: 18px;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 /* Scanlines */
@@ -51,33 +58,23 @@ body::before {
 body { animation: flicker 8s infinite; }
 
 /* =====================
-   LAYOUT — sidebar fija + contenido ocupa el resto
+   LAYOUT
    ===================== */
 .app-layout {
   display: flex;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;   /* contiene el overflow del ticker */
 }
 
 .main-content {
-  /* Ocupa TODO el ancho menos la sidebar */
-  width: calc(100% - var(--sidebar-w));
+  flex: 1;
   margin-left: var(--sidebar-w);
   padding: 1.5rem 2rem;
   min-height: 100vh;
-  box-sizing: border-box;
+  min-width: 0;          /* clave: evita que flex desborde */
   overflow-x: hidden;
-}
-
-/* Las páginas no tienen max-width fijo — crecen con el contenedor */
-.home,
-.profile,
-.explorer,
-.api-module,
-.gallery,
-.bitacora,
-.arbol {
-  width: 100%;
-  max-width: 1100px;
+  width: calc(100% - var(--sidebar-w));
 }
 
 /* Neon helpers */
@@ -95,6 +92,7 @@ body { animation: flicker 8s infinite; }
   display: flex;
   align-items: center;
   gap: 1rem;
+  overflow: hidden;       /* evita que el ::after desborde */
 }
 .section-title::after {
   content: '';
@@ -128,7 +126,9 @@ body { animation: flicker 8s infinite; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
-/* Animations */
+/* =====================
+   ANIMATIONS
+   ===================== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -154,15 +154,18 @@ body { animation: flicker 8s infinite; }
   to   { transform: rotate(360deg); }
 }
 
-/* Ticker */
+/* =====================
+   TICKER — contiene el overflow internamente
+   ===================== */
 .ticker-wrap {
   background: var(--bg3);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
+  overflow: hidden;       /* CRÍTICO: corta el texto animado */
   padding: 0.4rem 0;
   white-space: nowrap;
   margin-bottom: 2rem;
+  width: 100%;
 }
 .ticker-content {
   display: inline-block;
@@ -171,25 +174,25 @@ body { animation: flicker 8s infinite; }
   font-size: 0.45rem;
   color: var(--cyan);
   letter-spacing: 0.15em;
+  will-change: transform;
 }
 
 /* =====================
    RESPONSIVE
    ===================== */
-@media (max-width: 1024px) {
-  .main-content { padding: 1.5rem 1.5rem; }
-}
-
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
   .main-content {
-    width: 100%;
     margin-left: 0;
+    width: 100%;
     padding: 1rem;
     padding-top: 4.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .main-content { padding: 0.75rem; padding-top: 4rem; }
+  .main-content {
+    padding: 0.75rem;
+    padding-top: 4rem;
+  }
 }

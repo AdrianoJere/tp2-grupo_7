@@ -1,18 +1,30 @@
 import { useState, useCallback } from 'react'
 import Lightbox from '../components/Lightbox/Lightbox'
+import sf2         from '../assets/gallery/sf2.png'
+import pacman      from '../assets/gallery/pacman.png'
+import spaceinvaders from '../assets/gallery/spaceinvaders.png'
+import mk          from '../assets/gallery/mk.png'
+import donkeykong  from '../assets/gallery/donkeykong.png'
+import galaga      from '../assets/gallery/galaga.png'
+import contra      from '../assets/gallery/contra.png'
+import metalslug   from '../assets/gallery/metalslug.png'
+import tetris      from '../assets/gallery/tetris.png'
+import frogger     from '../assets/gallery/frogger.png'
+import asteroids   from '../assets/gallery/asteroids.png'
 import './Gallery.css'
 
-// Using placeholder images from picsum with tech/gaming aesthetic
 const IMAGES = [
-  { id: 1, src: 'https://picsum.photos/seed/arcade1/600/400',  titulo: 'STAGE 01 · ARCADE SETUP',      categoria: 'SETUP' },
-  { id: 2, src: 'https://picsum.photos/seed/code2/600/400',    titulo: 'STAGE 02 · CODE REVIEW',        categoria: 'CODE'  },
-  { id: 3, src: 'https://picsum.photos/seed/data3/600/400',    titulo: 'STAGE 03 · DATA PIPELINE',      categoria: 'DATA'  },
-  { id: 4, src: 'https://picsum.photos/seed/team4/600/400',    titulo: 'STAGE 04 · TEAM MEETING',       categoria: 'TEAM'  },
-  { id: 5, src: 'https://picsum.photos/seed/deploy5/600/400',  titulo: 'STAGE 05 · DEPLOY DAY',         categoria: 'DEVOPS'},
-  { id: 6, src: 'https://picsum.photos/seed/debug6/600/400',   titulo: 'STAGE 06 · DEBUG SESSION',      categoria: 'CODE'  },
-  { id: 7, src: 'https://picsum.photos/seed/sprint7/600/400',  titulo: 'STAGE 07 · SPRINT PLANNING',    categoria: 'TEAM'  },
-  { id: 8, src: 'https://picsum.photos/seed/server8/600/400',  titulo: 'STAGE 08 · SERVER ROOM',        categoria: 'DEVOPS'},
-  { id: 9, src: 'https://picsum.photos/seed/design9/600/400',  titulo: 'STAGE 09 · UI DESIGN',          categoria: 'SETUP' },
+  { id: 1,  src: sf2,          titulo: 'STREET FIGHTER II · 1991', categoria: 'CAPCOM'   },
+  { id: 2,  src: mk,           titulo: 'MORTAL KOMBAT · 1992',     categoria: 'MIDWAY'   },
+  { id: 3,  src: pacman,       titulo: 'PAC-MAN · 1980',           categoria: 'NAMCO'    },
+  { id: 4,  src: spaceinvaders,titulo: 'SPACE INVADERS · 1978',    categoria: 'TAITO'    },
+  { id: 5,  src: donkeykong,   titulo: 'DONKEY KONG · 1981',       categoria: 'NINTENDO' },
+  { id: 6,  src: galaga,       titulo: 'GALAGA · 1981',            categoria: 'NAMCO'    },
+  { id: 7,  src: contra,       titulo: 'CONTRA · 1987',            categoria: 'KONAMI'   },
+  { id: 8,  src: metalslug,    titulo: 'METAL SLUG · 1996',        categoria: 'SNK'      },
+  { id: 9,  src: tetris,       titulo: 'TETRIS · 1984',            categoria: 'NINTENDO' },
+  { id: 10, src: frogger,      titulo: 'FROGGER · 1981',           categoria: 'KONAMI'   },
+  { id: 11, src: asteroids,    titulo: 'ASTEROIDS · 1979',         categoria: 'ATARI'    },
 ]
 
 const CATS = ['Todos', ...new Set(IMAGES.map(i => i.categoria))]
@@ -35,27 +47,27 @@ export default function Gallery() {
   return (
     <div className="gallery">
       <div className="ticker-wrap">
-        <div className="ticker-content">{'★ GALERÍA INTERACTIVA ★ LIGHTBOX ★ ESC PARA CERRAR ★ ←→ PARA NAVEGAR ★ '.repeat(4)}</div>
+        <div className="ticker-content">
+          {'★ GALERÍA ARCADE ★ SF2 ★ MK ★ PAC-MAN ★ SPACE INVADERS ★ DONKEY KONG ★ GALAGA ★ CONTRA ★ METAL SLUG ★ TETRIS ★ FROGGER ★ ASTEROIDS ★ '.repeat(3)}
+        </div>
       </div>
 
-      <h1 className="section-title neon-cyan">// GALERÍA DE IMÁGENES</h1>
+      <h1 className="section-title neon-cyan">// GALERÍA ARCADE</h1>
 
-      {/* Categories */}
       <div className="gallery__cats">
         {CATS.map(c => (
           <button
             key={c}
             className={`gallery__cat ${category === c ? 'gallery__cat--active' : ''}`}
-            onClick={() => { setCategory(c); setActive(null); }}
+            onClick={() => { setCategory(c); setActive(null) }}
           >
             {c}
           </button>
         ))}
       </div>
 
-      <p className="gallery__hint">CLIC EN UNA IMAGEN PARA VER EN DETALLE · ESC PARA CERRAR</p>
+      <p className="gallery__hint">CLIC EN UNA IMAGEN PARA VER EN DETALLE · ESC PARA CERRAR · ← → PARA NAVEGAR</p>
 
-      {/* Grid */}
       <div className="gallery__grid">
         {filtered.map((img, i) => (
           <div
@@ -64,7 +76,7 @@ export default function Gallery() {
             onClick={() => setActive(i)}
             style={{ animationDelay: `${i * 0.05}s` }}
           >
-            <img src={img.src} alt={img.titulo} className="gallery__img" loading="lazy" />
+            <img src={img.src} alt={img.titulo} className="gallery__img" loading="lazy"/>
             <div className="gallery__overlay">
               <span className="gallery__overlay-title">{img.titulo}</span>
               <span className="gallery__overlay-cat">{img.categoria}</span>
@@ -75,7 +87,6 @@ export default function Gallery() {
         ))}
       </div>
 
-      {/* Lightbox */}
       {active !== null && (
         <Lightbox
           images={filtered}
