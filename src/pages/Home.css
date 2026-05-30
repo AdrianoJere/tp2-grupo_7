@@ -1,4 +1,4 @@
-.home { max-width: 960px; }
+.home { width: 100%; }
 
 .home__header {
   display: flex;

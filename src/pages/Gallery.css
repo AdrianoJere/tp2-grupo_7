@@ -1,4 +1,4 @@
-.gallery { max-width: 960px; }
+.gallery { width: 100%; }
 
 .gallery__cats {
   display: flex; gap: 0.5rem; flex-wrap: wrap;
