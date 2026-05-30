@@ -1,0 +1,118 @@
+.carousel {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 1.2rem;
+}
+
+.carousel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+}
+.carousel__label   { color: var(--text-dim); }
+.carousel--cyan    .carousel__counter { color: var(--cyan); }
+.carousel--magenta .carousel__counter { color: var(--magenta); }
+.carousel--yellow  .carousel__counter { color: var(--yellow); }
+
+.carousel__stage {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.carousel__arrow {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  clip-path: polygon(3px 0%, 100% 0%, calc(100% - 3px) 100%, 0% 100%);
+}
+.carousel--cyan    .carousel__arrow:hover { border-color: var(--cyan);    color: var(--cyan); }
+.carousel--magenta .carousel__arrow:hover { border-color: var(--magenta); color: var(--magenta); }
+.carousel--yellow  .carousel__arrow:hover { border-color: var(--yellow);  color: var(--yellow); }
+
+.carousel__card {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 1rem;
+  animation: fadeInUp 0.3s ease;
+}
+
+.carousel__thumb {
+  aspect-ratio: 4/3;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.carousel__thumb-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.5rem;
+}
+.carousel__thumb-icon  { font-size: 2.5rem; }
+.carousel__thumb-name  { font-family: var(--font-pixel); font-size: 0.4rem; color: var(--text-dim); }
+
+.carousel__info { display: flex; flex-direction: column; gap: 0.5rem; }
+.carousel__title {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+}
+.carousel--cyan    .carousel__title { color: var(--cyan); }
+.carousel--magenta .carousel__title { color: var(--magenta); }
+.carousel--yellow  .carousel__title { color: var(--yellow); }
+
+.carousel__desc { font-family: var(--font-retro); font-size: 0.95rem; color: var(--text); line-height: 1.4; opacity: 0.8; }
+
+.carousel__stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.carousel__tech {
+  font-family: var(--font-pixel);
+  font-size: 0.32rem;
+  padding: 0.2rem 0.4rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+}
+
+.carousel__links { display: flex; gap: 0.5rem; margin-top: 0.3rem; }
+.carousel__link {
+  display: flex; align-items: center; gap: 0.3rem;
+  font-family: var(--font-pixel); font-size: 0.38rem;
+  text-decoration: none; color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.6rem;
+  clip-path: polygon(3px 0%, 100% 0%, calc(100% - 3px) 100%, 0% 100%);
+  transition: all 0.15s;
+}
+.carousel--cyan    .carousel__link:hover { color: var(--cyan);    border-color: var(--cyan); }
+.carousel--magenta .carousel__link:hover { color: var(--magenta); border-color: var(--magenta); }
+.carousel--yellow  .carousel__link:hover { color: var(--yellow);  border-color: var(--yellow); }
+
+.carousel__dots {
+  display: flex; justify-content: center; gap: 0.4rem; margin-top: 0.8rem;
+}
+.carousel__dot {
+  width: 8px; height: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  clip-path: polygon(2px 0%, 100% 0%, calc(100% - 2px) 100%, 0% 100%);
+  transition: all 0.15s;
+}
+.carousel--cyan    .carousel__dot--active { background: var(--cyan);    border-color: var(--cyan);    box-shadow: 0 0 6px var(--cyan); }
+.carousel--magenta .carousel__dot--active { background: var(--magenta); border-color: var(--magenta); box-shadow: 0 0 6px var(--magenta); }
+.carousel--yellow  .carousel__dot--active { background: var(--yellow);  border-color: var(--yellow);  box-shadow: 0 0 6px var(--yellow); }
+
+@media (max-width: 500px) {
+  .carousel__card { grid-template-columns: 1fr; }
+  .carousel__thumb { display: none; }
+}

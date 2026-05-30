@@ -1,0 +1,71 @@
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(2,4,8,0.92);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeInUp 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.lightbox__box {
+  position: relative;
+  max-width: 90vw; max-height: 90vh;
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.lightbox__close {
+  position: absolute;
+  top: -2.5rem; right: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer; font-size: 1.2rem;
+  padding: 0.4rem;
+  clip-path: polygon(3px 0%, 100% 0%, calc(100% - 3px) 100%, 0% 100%);
+  transition: all 0.15s;
+}
+.lightbox__close:hover { border-color: var(--cyan); color: var(--cyan); }
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(2,4,8,0.8);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer; font-size: 1.5rem;
+  padding: 0.6rem;
+  clip-path: polygon(3px 0%, 100% 0%, calc(100% - 3px) 100%, 0% 100%);
+  transition: all 0.15s;
+  z-index: 2;
+}
+.lightbox__nav:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 15px var(--cyan); }
+.lightbox__nav--prev { left: -3.5rem; }
+.lightbox__nav--next { right: -3.5rem; }
+
+.lightbox__img-wrap {
+  position: relative;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.lightbox__img {
+  max-width: 80vw; max-height: 70vh;
+  display: block;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.lightbox__zoom-hint {
+  position: absolute; bottom: 0.5rem; right: 0.5rem;
+  color: var(--cyan); opacity: 0.5; font-size: 1rem;
+}
+
+.lightbox__caption {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; padding: 0 0.5rem;
+}
+.lightbox__title { font-family: var(--font-pixel); font-size: 0.45rem; color: var(--cyan); }
+.lightbox__counter { font-family: var(--font-pixel); font-size: 0.4rem; color: var(--text-dim); }
+
+@media (max-width: 600px) {
+  .lightbox__nav--prev { left: -2.5rem; }
+  .lightbox__nav--next { right: -2.5rem; }
+}

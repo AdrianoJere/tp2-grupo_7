@@ -1,0 +1,47 @@
+.skill-bar { margin-bottom: 1rem; }
+
+.skill-bar__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  letter-spacing: 0.08em;
+}
+.skill-bar__name  { color: var(--text); }
+.skill-bar__value--cyan    { color: var(--cyan);    text-shadow: 0 0 6px var(--cyan); }
+.skill-bar__value--magenta { color: var(--magenta); text-shadow: 0 0 6px var(--magenta); }
+.skill-bar__value--yellow  { color: var(--yellow);  text-shadow: 0 0 6px var(--yellow); }
+
+.skill-bar__track {
+  position: relative;
+  height: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+
+.skill-bar__fill {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  opacity: 0.15;
+}
+.skill-bar__fill--cyan    { background: var(--cyan); }
+.skill-bar__fill--magenta { background: var(--magenta); }
+.skill-bar__fill--yellow  { background: var(--yellow); }
+
+.skill-bar__blocks {
+  position: absolute;
+  inset: 2px;
+  display: flex;
+  gap: 2px;
+}
+.skill-bar__block {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.skill-bar__block--on.skill-bar__block--cyan    { background: var(--cyan);    box-shadow: 0 0 4px var(--cyan); }
+.skill-bar__block--on.skill-bar__block--magenta { background: var(--magenta); box-shadow: 0 0 4px var(--magenta); }
+.skill-bar__block--on.skill-bar__block--yellow  { background: var(--yellow);  box-shadow: 0 0 4px var(--yellow); }
