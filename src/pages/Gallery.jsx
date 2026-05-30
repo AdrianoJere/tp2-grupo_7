@@ -1,16 +1,5 @@
 import { useState, useCallback } from 'react'
 import Lightbox from '../components/Lightbox/Lightbox'
-import sf2         from '../assets/gallery/sf2.png'
-import pacman      from '../assets/gallery/pacman.png'
-import spaceinvaders from '../assets/gallery/spaceinvaders.png'
-import mk          from '../assets/gallery/mk.png'
-import donkeykong  from '../assets/gallery/donkeykong.png'
-import galaga      from '../assets/gallery/galaga.png'
-import contra      from '../assets/gallery/contra.png'
-import metalslug   from '../assets/gallery/metalslug.png'
-import tetris      from '../assets/gallery/tetris.png'
-import frogger     from '../assets/gallery/frogger.png'
-import asteroids   from '../assets/gallery/asteroids.png'
 import './Gallery.css'
 
 const IMAGES = [
@@ -25,18 +14,6 @@ const IMAGES = [
   { id: 9,  src: '/gallery/tetris.png',       titulo: 'TETRIS · 1984',            categoria: 'NINTENDO' },
   { id: 10, src: '/gallery/frogger.png',      titulo: 'FROGGER · 1981',           categoria: 'KONAMI'   },
   { id: 11, src: '/gallery/asteroids.png',    titulo: 'ASTEROIDS · 1979',         categoria: 'ATARI'    },
-  
-  { id: 1,  src: sf2,          titulo: 'STREET FIGHTER II · 1991', categoria: 'CAPCOM'   },
-  { id: 2,  src: mk,           titulo: 'MORTAL KOMBAT · 1992',     categoria: 'MIDWAY'   },
-  { id: 3,  src: pacman,       titulo: 'PAC-MAN · 1980',           categoria: 'NAMCO'    },
-  { id: 4,  src: spaceinvaders,titulo: 'SPACE INVADERS · 1978',    categoria: 'TAITO'    },
-  { id: 5,  src: donkeykong,   titulo: 'DONKEY KONG · 1981',       categoria: 'NINTENDO' },
-  { id: 6,  src: galaga,       titulo: 'GALAGA · 1981',            categoria: 'NAMCO'    },
-  { id: 7,  src: contra,       titulo: 'CONTRA · 1987',            categoria: 'KONAMI'   },
-  { id: 8,  src: metalslug,    titulo: 'METAL SLUG · 1996',        categoria: 'SNK'      },
-  { id: 9,  src: tetris,       titulo: 'TETRIS · 1984',            categoria: 'NINTENDO' },
-  { id: 10, src: frogger,      titulo: 'FROGGER · 1981',           categoria: 'KONAMI'   },
-  { id: 11, src: asteroids,    titulo: 'ASTEROIDS · 1979',         categoria: 'ATARI'    },
 ]
 
 const CATS = ['Todos', ...new Set(IMAGES.map(i => i.categoria))]
