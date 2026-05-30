@@ -55,7 +55,9 @@ body::before {
 }
 body { animation: flicker 8s infinite; }
 
-/* Layout */
+/* =====================
+   LAYOUT
+   ===================== */
 .app-layout {
   display: flex;
   min-height: 100vh;
@@ -64,8 +66,10 @@ body { animation: flicker 8s infinite; }
 .main-content {
   margin-left: var(--sidebar-w);
   flex: 1;
-  padding: 2rem;
+  padding: 2rem 2.5rem;
   min-height: 100vh;
+  min-width: 0;        /* prevents flex children from overflowing */
+  overflow-x: hidden;
 }
 
 /* Neon text helpers */
@@ -149,10 +153,6 @@ body { animation: flicker 8s infinite; }
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
 }
-@keyframes typing {
-  from { width: 0; }
-  to   { width: 100%; }
-}
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -185,8 +185,27 @@ body { animation: flicker 8s infinite; }
   letter-spacing: 0.15em;
 }
 
-/* Responsive */
+/* =====================
+   RESPONSIVE
+   ===================== */
+@media (max-width: 900px) {
+  .main-content {
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
-  .main-content { margin-left: 0; padding: 1rem; padding-top: 4rem; }
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+    padding-top: 4.5rem;  /* room for the mobile toggle button */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0.75rem;
+    padding-top: 4rem;
+  }
 }

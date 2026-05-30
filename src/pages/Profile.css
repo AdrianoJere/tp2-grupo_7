@@ -142,3 +142,13 @@
   .profile__name { font-size: 1rem; }
   .profile__avatar-wrap { width: 120px; height: 120px; }
 }
+
+/* Extra responsive fixes */
+.profile { width: 100%; }
+@media (max-width: 500px) {
+  .profile__name { font-size: 0.75rem; }
+  .profile__avatar-wrap { width: 100px; height: 100px; }
+  .profile__stack { gap: 0.5rem; }
+  .profile__tech { min-width: 60px; padding: 0.6rem 0.7rem; }
+  .profile__tech-icon { font-size: 1.4rem; }
+}

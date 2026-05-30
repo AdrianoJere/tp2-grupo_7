@@ -134,3 +134,12 @@
   .bitacora__branch { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
   .bitacora__branch-name { min-width: auto; }
 }
+
+/* Extra responsive fixes */
+.bitacora { width: 100%; }
+@media (max-width: 500px) {
+  .bitacora__roles { grid-template-columns: 1fr; }
+  .bitacora__branch { flex-direction: column; gap: 0.25rem; }
+  .bitacora__branch-name { min-width: auto; }
+  .bitacora__mig-arrow { transform: rotate(90deg); align-self: center; }
+}
