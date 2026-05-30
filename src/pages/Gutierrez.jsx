@@ -29,7 +29,7 @@ const DATA = {
   ],
   proyectos: [
     {
-      nombre: 'Proyecto 1',
+      nombre: 'E-commerce retail — Análisis de Datos',
       emoji: '📊',
       descripcion:
         'Proyecto de análisis de datos con Python y SQL. Procesamiento y visualización de datasets.',
@@ -39,11 +39,12 @@ const DATA = {
       repo: null,
     },
     {
-      nombre: 'Proyecto 2',
+      nombre: 'PFO 1 — Sitio Web Personal',
       emoji: '💡',
       descripcion:
         'Desarrollo web con HTML, CSS y JavaScript. Interfaces dinámicas y diseño responsivo.',
       stack: ['HTML', 'CSS', 'JavaScript'],
+      imagen: '/proyectos/pfo1_banner.png',
       demo: 'https://pfo-1-delta.vercel.app/',
       repo: null,
     },
