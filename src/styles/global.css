@@ -18,7 +18,6 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -30,23 +29,19 @@ body {
   overflow-x: hidden;
 }
 
-/* Scanlines overlay */
+/* Scanlines */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.08) 2px,
-    rgba(0,0,0,0.08) 4px
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px
   );
   pointer-events: none;
   z-index: 9999;
 }
 
-/* CRT flicker */
 @keyframes flicker {
   0%, 100% { opacity: 1; }
   92% { opacity: 1; }
@@ -56,7 +51,7 @@ body::before {
 body { animation: flicker 8s infinite; }
 
 /* =====================
-   LAYOUT
+   LAYOUT — sidebar fija + contenido ocupa el resto
    ===================== */
 .app-layout {
   display: flex;
@@ -64,15 +59,28 @@ body { animation: flicker 8s infinite; }
 }
 
 .main-content {
+  /* Ocupa TODO el ancho menos la sidebar */
+  width: calc(100% - var(--sidebar-w));
   margin-left: var(--sidebar-w);
-  flex: 1;
-  padding: 2rem 2.5rem;
+  padding: 1.5rem 2rem;
   min-height: 100vh;
-  min-width: 0;        /* prevents flex children from overflowing */
+  box-sizing: border-box;
   overflow-x: hidden;
 }
 
-/* Neon text helpers */
+/* Las páginas no tienen max-width fijo — crecen con el contenedor */
+.home,
+.profile,
+.explorer,
+.api-module,
+.gallery,
+.bitacora,
+.arbol {
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* Neon helpers */
 .neon-cyan  { color: var(--cyan);    text-shadow: 0 0 8px var(--cyan),   0 0 20px var(--cyan); }
 .neon-mag   { color: var(--magenta); text-shadow: 0 0 8px var(--magenta),0 0 20px var(--magenta); }
 .neon-yel   { color: var(--yellow);  text-shadow: 0 0 8px var(--yellow), 0 0 20px var(--yellow); }
@@ -115,22 +123,6 @@ body { animation: flicker 8s infinite; }
   box-shadow: 0 0 20px var(--cyan);
 }
 
-/* Card base */
-.card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  padding: 1.5rem;
-  position: relative;
-}
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(0,255,255,0.03) 0%, transparent 60%);
-  pointer-events: none;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -161,10 +153,6 @@ body { animation: flicker 8s infinite; }
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-@keyframes glow-pulse {
-  0%, 100% { opacity: 0.6; }
-  50%       { opacity: 1; }
-}
 
 /* Ticker */
 .ticker-wrap {
@@ -188,24 +176,20 @@ body { animation: flicker 8s infinite; }
 /* =====================
    RESPONSIVE
    ===================== */
-@media (max-width: 900px) {
-  .main-content {
-    padding: 1.5rem;
-  }
+@media (max-width: 1024px) {
+  .main-content { padding: 1.5rem 1.5rem; }
 }
 
 @media (max-width: 768px) {
   :root { --sidebar-w: 0px; }
   .main-content {
+    width: 100%;
     margin-left: 0;
     padding: 1rem;
-    padding-top: 4.5rem;  /* room for the mobile toggle button */
+    padding-top: 4.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .main-content {
-    padding: 0.75rem;
-    padding-top: 4rem;
-  }
+  .main-content { padding: 0.75rem; padding-top: 4rem; }
 }

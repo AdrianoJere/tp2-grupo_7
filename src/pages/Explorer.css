@@ -1,4 +1,4 @@
-.explorer { max-width: 960px; }
+.explorer { width: 100%; }
 
 /* Search */
 .explorer__search-wrap {
