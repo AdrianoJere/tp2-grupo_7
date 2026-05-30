@@ -1,4 +1,4 @@
-.arbol { max-width: 900px; width: 100%; }
+.arbol { width: 100%; }
 
 /* Legend */
 .arbol__legend {
@@ -7,16 +7,15 @@
   background: var(--bg2);
   border: 1px solid var(--border);
   padding: 1rem;
-  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+  width: 100%;
 }
 .arbol__legend-item {
   display: flex; align-items: center; gap: 0.4rem;
   font-family: var(--font-pixel); font-size: 0.35rem;
 }
 .arbol__legend-dot {
-  width: 8px; height: 8px;
+  width: 8px; height: 8px; flex-shrink: 0;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  flex-shrink: 0;
 }
 .arbol__legend-dot--cyan    { background: var(--cyan);    box-shadow: 0 0 6px var(--cyan); }
 .arbol__legend-dot--yellow  { background: var(--yellow);  box-shadow: 0 0 6px var(--yellow); }
@@ -27,50 +26,46 @@
 .arbol__legend-label { color: var(--text-dim); }
 
 /* =====================
-   TREE CONTAINER
+   TREE CONTAINER — ocupa todo el ancho disponible
    ===================== */
 .arbol__tree {
   background: var(--bg2);
   border: 1px solid var(--border);
-  padding: 1.5rem 1rem;
+  padding: 1.5rem;
   margin-bottom: 2rem;
-  overflow-x: auto;   /* horizontal scroll on small screens */
+  width: 100%;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Scroll hint for mobile */
 .arbol__scroll-hint {
   display: none;
   text-align: center;
-  font-family: var(--font-pixel);
-  font-size: 0.35rem;
-  color: var(--text-dim);
-  margin-bottom: 0.75rem;
+  font-family: var(--font-pixel); font-size: 0.35rem;
+  color: var(--text-dim); margin-bottom: 0.75rem;
   animation: blink 1.5s step-end infinite;
 }
-@media (max-width: 600px) {
-  .arbol__scroll-hint { display: block; }
-}
+@media (max-width: 600px) { .arbol__scroll-hint { display: block; } }
 
 /* =====================
-   NODE WRAP — indentation via padding, NOT nested margin
+   NODE WRAP
    ===================== */
 .arbol__node-wrap {
   position: relative;
-  padding-left: calc(var(--depth, 0) * 22px);
   margin: 3px 0;
+  display: block;
+  width: 100%;
 }
 
-/* Vertical connector line */
 .arbol__children {
-  position: relative;
-  padding-left: 10px;
-  margin-left: 8px;
+  padding-left: 1.5rem;
+  margin-left: 0.5rem;
   border-left: 1px dashed rgba(255,255,255,0.08);
+  width: 100%;
 }
 
 /* =====================
-   NODE CHIP
+   NODE CHIP — inline pero no limita el contenedor
    ===================== */
 .arbol__node {
   display: inline-flex;
@@ -83,26 +78,14 @@
   transition: background 0.15s, border-color 0.15s;
   cursor: default;
   animation: fadeInUp 0.3s ease both;
-  white-space: nowrap;   /* keep chips on one line */
+  white-space: nowrap;
 }
 .arbol__node:hover { background: rgba(255,255,255,0.04); }
 
 .arbol__node-icon { font-size: 0.75rem; flex-shrink: 0; line-height: 1; }
-.arbol__node-name {
-  font-family: var(--font-pixel);
-  font-size: 0.38rem;
-  letter-spacing: 0.04em;
-  color: var(--text);
-}
-.arbol__node-type {
-  font-family: var(--font-pixel);
-  font-size: 0.28rem;
-  padding: 0.1rem 0.3rem;
-  border: 1px solid;
-  opacity: 0.7;
-}
+.arbol__node-name { font-family: var(--font-pixel); font-size: 0.38rem; letter-spacing: 0.04em; color: var(--text); }
+.arbol__node-type { font-family: var(--font-pixel); font-size: 0.28rem; padding: 0.1rem 0.3rem; border: 1px solid; opacity: 0.7; }
 
-/* Color variants */
 .arbol__node--cyan    .arbol__node-icon,
 .arbol__node--cyan    .arbol__node-name { color: var(--cyan); }
 .arbol__node--cyan    .arbol__node-type { color: var(--cyan); border-color: rgba(0,255,255,0.35); }
@@ -131,27 +114,18 @@
    STATS
    ===================== */
 .arbol__stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; width: 100%;
 }
 .arbol__stat {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  padding: 1rem;
-  text-align: center;
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 1rem; text-align: center;
   display: flex; flex-direction: column; gap: 0.3rem;
   clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
 }
 .arbol__stat-value { font-family: var(--font-pixel); font-size: 1.2rem; }
 .arbol__stat-label { font-family: var(--font-pixel); font-size: 0.33rem; color: var(--text-dim); letter-spacing: 0.08em; }
 
-/* =====================
-   RESPONSIVE
-   ===================== */
 @media (max-width: 600px) {
   .arbol__stats { grid-template-columns: repeat(2, 1fr); }
   .arbol__tree  { padding: 1rem 0.5rem; }
-  .arbol__node-name { font-size: 0.32rem; }
-  .arbol__node-type { font-size: 0.24rem; }
 }
