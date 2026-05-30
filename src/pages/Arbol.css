@@ -1,5 +1,6 @@
-.arbol { max-width: 900px; }
+.arbol { max-width: 900px; width: 100%; }
 
+/* Legend */
 .arbol__legend {
   display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
   margin-bottom: 2rem;
@@ -13,8 +14,9 @@
   font-family: var(--font-pixel); font-size: 0.35rem;
 }
 .arbol__legend-dot {
-  width: 8px; height: 8px; border-radius: 0;
+  width: 8px; height: 8px;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  flex-shrink: 0;
 }
 .arbol__legend-dot--cyan    { background: var(--cyan);    box-shadow: 0 0 6px var(--cyan); }
 .arbol__legend-dot--yellow  { background: var(--yellow);  box-shadow: 0 0 6px var(--yellow); }
@@ -24,88 +26,132 @@
 .arbol__legend-type { color: var(--text); }
 .arbol__legend-label { color: var(--text-dim); }
 
-/* Tree */
+/* =====================
+   TREE CONTAINER
+   ===================== */
 .arbol__tree {
   background: var(--bg2);
   border: 1px solid var(--border);
-  padding: 1.5rem;
-  overflow-x: auto;
+  padding: 1.5rem 1rem;
   margin-bottom: 2rem;
+  overflow-x: auto;   /* horizontal scroll on small screens */
+  -webkit-overflow-scrolling: touch;
 }
 
+/* Scroll hint for mobile */
+.arbol__scroll-hint {
+  display: none;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 0.35rem;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+  animation: blink 1.5s step-end infinite;
+}
+@media (max-width: 600px) {
+  .arbol__scroll-hint { display: block; }
+}
+
+/* =====================
+   NODE WRAP — indentation via padding, NOT nested margin
+   ===================== */
 .arbol__node-wrap {
   position: relative;
-  padding-left: calc(var(--depth) * 1.5rem);
-  margin: 0.25rem 0;
+  padding-left: calc(var(--depth, 0) * 22px);
+  margin: 3px 0;
 }
-.arbol__node-wrap::before {
-  content: '';
-  position: absolute;
-  left: calc(var(--depth) * 1.5rem - 0.75rem);
-  top: 0; bottom: 0;
-  width: 1px;
-  background: rgba(255,255,255,0.06);
-  display: var(--depth, none);
-}
-.arbol__node-wrap[style*="--depth: 0"]::before { display: none; }
 
+/* Vertical connector line */
+.arbol__children {
+  position: relative;
+  padding-left: 10px;
+  margin-left: 8px;
+  border-left: 1px dashed rgba(255,255,255,0.08);
+}
+
+/* =====================
+   NODE CHIP
+   ===================== */
 .arbol__node {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.8rem;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
   background: var(--bg3);
   border: 1px solid var(--border);
   clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
-  margin-bottom: 0.1rem;
-  transition: all 0.15s;
+  transition: background 0.15s, border-color 0.15s;
   cursor: default;
   animation: fadeInUp 0.3s ease both;
+  white-space: nowrap;   /* keep chips on one line */
 }
 .arbol__node:hover { background: rgba(255,255,255,0.04); }
 
-.arbol__node-icon { font-size: 0.8rem; flex-shrink: 0; }
-.arbol__node-name { font-family: var(--font-pixel); font-size: 0.4rem; letter-spacing: 0.05em; color: var(--text); }
+.arbol__node-icon { font-size: 0.75rem; flex-shrink: 0; line-height: 1; }
+.arbol__node-name {
+  font-family: var(--font-pixel);
+  font-size: 0.38rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
 .arbol__node-type {
-  font-family: var(--font-pixel); font-size: 0.3rem;
-  padding: 0.1rem 0.3rem; border: 1px solid; opacity: 0.7;
+  font-family: var(--font-pixel);
+  font-size: 0.28rem;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid;
+  opacity: 0.7;
 }
 
+/* Color variants */
 .arbol__node--cyan    .arbol__node-icon,
 .arbol__node--cyan    .arbol__node-name { color: var(--cyan); }
-.arbol__node--cyan    .arbol__node-type { color: var(--cyan); border-color: rgba(0,255,255,0.3); }
+.arbol__node--cyan    .arbol__node-type { color: var(--cyan); border-color: rgba(0,255,255,0.35); }
+.arbol__node--cyan:hover { border-color: rgba(0,255,255,0.4); }
 
 .arbol__node--yellow  .arbol__node-icon,
 .arbol__node--yellow  .arbol__node-name { color: var(--yellow); }
-.arbol__node--yellow  .arbol__node-type { color: var(--yellow); border-color: rgba(255,255,0,0.3); }
+.arbol__node--yellow  .arbol__node-type { color: var(--yellow); border-color: rgba(255,255,0,0.35); }
+.arbol__node--yellow:hover { border-color: rgba(255,255,0,0.4); }
 
 .arbol__node--magenta .arbol__node-icon,
 .arbol__node--magenta .arbol__node-name { color: var(--magenta); }
-.arbol__node--magenta .arbol__node-type { color: var(--magenta); border-color: rgba(255,0,255,0.3); }
+.arbol__node--magenta .arbol__node-type { color: var(--magenta); border-color: rgba(255,0,255,0.35); }
+.arbol__node--magenta:hover { border-color: rgba(255,0,255,0.4); }
 
 .arbol__node--green   .arbol__node-icon,
 .arbol__node--green   .arbol__node-name { color: var(--green); }
-.arbol__node--green   .arbol__node-type { color: var(--green); border-color: rgba(0,255,65,0.3); }
+.arbol__node--green   .arbol__node-type { color: var(--green); border-color: rgba(0,255,65,0.35); }
+.arbol__node--green:hover { border-color: rgba(0,255,65,0.4); }
 
 .arbol__node--dim     .arbol__node-icon,
 .arbol__node--dim     .arbol__node-name { color: var(--text-dim); }
 .arbol__node--dim     .arbol__node-type { color: var(--text-dim); border-color: rgba(136,136,136,0.3); }
 
-.arbol__children { padding-left: 1rem; border-left: 1px dashed rgba(255,255,255,0.06); margin-left: 0.5rem; }
-
-/* Stats */
+/* =====================
+   STATS
+   ===================== */
 .arbol__stats {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
 .arbol__stat {
-  background: var(--bg2); border: 1px solid var(--border);
-  padding: 1rem; text-align: center;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  text-align: center;
   display: flex; flex-direction: column; gap: 0.3rem;
   clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
 }
 .arbol__stat-value { font-family: var(--font-pixel); font-size: 1.2rem; }
-.arbol__stat-label { font-family: var(--font-pixel); font-size: 0.33rem; color: var(--text-dim); letter-spacing: 0.1em; }
+.arbol__stat-label { font-family: var(--font-pixel); font-size: 0.33rem; color: var(--text-dim); letter-spacing: 0.08em; }
 
+/* =====================
+   RESPONSIVE
+   ===================== */
 @media (max-width: 600px) {
-  .arbol__stats { grid-template-columns: repeat(2,1fr); }
+  .arbol__stats { grid-template-columns: repeat(2, 1fr); }
+  .arbol__tree  { padding: 1rem 0.5rem; }
+  .arbol__node-name { font-size: 0.32rem; }
+  .arbol__node-type { font-size: 0.24rem; }
 }
