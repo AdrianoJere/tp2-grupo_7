@@ -26,10 +26,14 @@ export default function Carousel({ projects, color = 'cyan' }) {
 
         <div className="carousel__card" key={current}>
           <div className="carousel__thumb">
-            <div className="carousel__thumb-placeholder">
-              <span className="carousel__thumb-icon">{p.emoji}</span>
-              <span className="carousel__thumb-name">{p.nombre}</span>
-            </div>
+            {p.imagen ? (
+              <img src={p.imagen} alt={p.nombre} className="carousel__thumb-img" />
+            ) : (
+              <div className="carousel__thumb-placeholder">
+                <span className="carousel__thumb-icon">{p.emoji}</span>
+                <span className="carousel__thumb-name">{p.nombre}</span>
+              </div>
+            )}
           </div>
           <div className="carousel__info">
             <h4 className="carousel__title">{p.nombre}</h4>
@@ -57,7 +61,6 @@ export default function Carousel({ projects, color = 'cyan' }) {
         </button>
       </div>
 
-      {/* Dots */}
       <div className="carousel__dots">
         {projects.map((_, i) => (
           <button
