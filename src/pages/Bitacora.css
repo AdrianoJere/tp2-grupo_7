@@ -1,4 +1,4 @@
-.bitacora { max-width: 900px; }
+.bitacora { width: 100%; }
 .bitacora__section { margin-bottom: 3rem; }
 .bitacora__subtitle {
   font-family: var(--font-pixel); font-size: 0.55rem;

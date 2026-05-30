@@ -1,4 +1,4 @@
-.profile { max-width: 900px; animation: fadeInUp 0.4s ease; }
+.profile { width: 100%; animation: fadeInUp 0.4s ease; }
 
 /* Hero */
 .profile__hero {
