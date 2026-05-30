@@ -14,6 +14,18 @@ import asteroids   from '../assets/gallery/asteroids.png'
 import './Gallery.css'
 
 const IMAGES = [
+  { id: 1,  src: '/gallery/sf2.png',          titulo: 'STREET FIGHTER II · 1991', categoria: 'CAPCOM'   },
+  { id: 2,  src: '/gallery/mk.png',           titulo: 'MORTAL KOMBAT · 1992',     categoria: 'MIDWAY'   },
+  { id: 3,  src: '/gallery/pacman.png',       titulo: 'PAC-MAN · 1980',           categoria: 'NAMCO'    },
+  { id: 4,  src: '/gallery/spaceinvaders.png',titulo: 'SPACE INVADERS · 1978',    categoria: 'TAITO'    },
+  { id: 5,  src: '/gallery/donkeykong.png',   titulo: 'DONKEY KONG · 1981',       categoria: 'NINTENDO' },
+  { id: 6,  src: '/gallery/galaga.png',       titulo: 'GALAGA · 1981',            categoria: 'NAMCO'    },
+  { id: 7,  src: '/gallery/contra.png',       titulo: 'CONTRA · 1987',            categoria: 'KONAMI'   },
+  { id: 8,  src: '/gallery/metalslug.png',    titulo: 'METAL SLUG · 1996',        categoria: 'SNK'      },
+  { id: 9,  src: '/gallery/tetris.png',       titulo: 'TETRIS · 1984',            categoria: 'NINTENDO' },
+  { id: 10, src: '/gallery/frogger.png',      titulo: 'FROGGER · 1981',           categoria: 'KONAMI'   },
+  { id: 11, src: '/gallery/asteroids.png',    titulo: 'ASTEROIDS · 1979',         categoria: 'ATARI'    },
+  
   { id: 1,  src: sf2,          titulo: 'STREET FIGHTER II · 1991', categoria: 'CAPCOM'   },
   { id: 2,  src: mk,           titulo: 'MORTAL KOMBAT · 1992',     categoria: 'MIDWAY'   },
   { id: 3,  src: pacman,       titulo: 'PAC-MAN · 1980',           categoria: 'NAMCO'    },
